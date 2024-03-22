@@ -1,4 +1,4 @@
-export function TodoItem({completed, id, title, toggleTodo, deleteTodo}) {
+export default function ToDoItem({completed, id, title, toggleTodo, deleteTodo}: ToDoProps) {
     return (
         <li key={id}>
             <label>

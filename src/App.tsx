@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import {NewTodoForm} from "./NewTodoForm"
-import {TodoList} from "./TodoList"
-import "./style.css";
+import NewToDoForm from "./components/NewToDoForm"
+import ToDoList from "./components/ToDoList"
+
 
 export default function App() {
-  const [todos, setTodos] = useState(() => {
+  const [todos, setTodos] = useState<ToDoObject[]>(() => {
     const localValue = localStorage.getItem("ITEMS");
     if(localValue == null) return [];
     return JSON.parse(localValue);
@@ -14,8 +14,8 @@ export default function App() {
     localStorage.setItem("ITEMS", JSON.stringify(todos));
   }, [todos])
 
-  function addTodo(title) {
-    setTodos(currentTodos => {
+  function addTodo(title: string) {
+    setTodos((currentTodos: ToDoObject[])=> {
       return [
         ...currentTodos,
         { id: crypto.randomUUID(), title: title, completed: false },
@@ -23,9 +23,9 @@ export default function App() {
       ];
     });
   }
-  function toggleTodo(id, completed) {
-    setTodos(currentTodos => {
-      return currentTodos.map(todo => {
+  function toggleTodo(id: string, completed: boolean) {
+    setTodos((currentTodos: ToDoObject[]) => {
+      return currentTodos.map(todo  => {
         if (todo.id === id) {
           return { ...todo, completed };
         }
@@ -33,16 +33,16 @@ export default function App() {
       });
     });
   }
-  function deleteTodo(id) {
+  function deleteTodo(id: string) {
     setTodos(currentTodos => {
       return currentTodos.filter(todo => todo.id != id);
     });
   }
   return(
    <>
-    <NewTodoForm onSubmit={addTodo} />
+    <NewToDoForm onSubmit={addTodo} />
     <h1>Todo List {todos.length}</h1>
-    <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
+    <ToDoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
   </>
   )
 }
