@@ -3,13 +3,17 @@
 interface ToDoObject {
     id: string,
     title: string,
-    completed: boolean
+    completed: boolean,
+    colorIndex: number,
+    rotationIndex: number
 }
 
 interface ToDoProps {
   id: string,
   title: string,
   completed: boolean,
+  colorIndex: number,
+  rotationIndex: number,
   toggleTodo: (id: string, checked: boolean) => void,
   deleteTodo: (id: string) => void
 }

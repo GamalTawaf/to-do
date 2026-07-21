@@ -1,20 +1,27 @@
-export default function ToDoItem({completed, id, title, toggleTodo, deleteTodo}: ToDoProps) {
+import { COLORS, ROTATIONS } from "../noteStyles";
+
+export default function ToDoItem({completed, id, title, colorIndex, rotationIndex, toggleTodo, deleteTodo}: ToDoProps) {
+    const noteClass = `note ${COLORS[colorIndex % COLORS.length]}${completed ? " done" : ""}`;
+    const style = { "--rot": `${ROTATIONS[rotationIndex % ROTATIONS.length]}deg` } as React.CSSProperties;
+
     return (
-        <li key={id}>
+        <li className={noteClass} style={style}>
+            <button
+              onClick={() => deleteTodo(id)}
+              className="btn-danger"
+              aria-label={`Delete '${title}'`}
+            >
+              ✕
+            </button>
             <label>
-              <input 
-                type="checkbox" 
-                checked={completed} 
+              <input
+                type="checkbox"
+                checked={completed}
                 onChange={e => toggleTodo(id, e.target.checked)}
               />
-              {title}  
+              <span className="checkmark">✓</span>
+              <span className="note-text">{title}</span>
             </label>
-            <button 
-              onClick={() => deleteTodo(id)}
-              className="btn btn-danger" 
-            >
-              Delete
-            </button>
           </li>
     );
 }
