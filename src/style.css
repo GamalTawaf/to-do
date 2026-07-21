@@ -1,140 +1,397 @@
+@font-face {
+  font-family: 'Caveat';
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url('./assets/fonts/caveat-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Caveat';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('./assets/fonts/caveat-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url('./assets/fonts/sg-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('./assets/fonts/sg-700.woff2') format('woff2');
+}
+
+:root {
+  --board: #c69c6d;
+  --board-deep: #a87c4f;
+  --board-fleck: rgba(80, 55, 30, 0.18);
+  --board-ink: #1c1611;
+  --ink: #2b2320;
+  --ink-soft: #5a4a3c;
+  --tape: #efe7d8;
+  --accent: #e2432f;
+  --note-a: #ffd966;
+  --note-b: #ffb199;
+  --note-c: #8fe3c0;
+  --note-d: #a6b8ff;
+  --shadow: rgba(43, 35, 32, 0.4);
+  --focus: #1c4fd6;
+  --font-hand: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
+  --font-ui: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --board: #34281d;
+    --board-deep: #241c14;
+    --board-fleck: rgba(0, 0, 0, 0.35);
+    --board-ink: #d9cdb2;
+    --ink: #241c17;
+    --ink-soft: #4a3b31;
+    --tape: #d9cdb2;
+    --accent: #ff5c46;
+    --note-a: #f2c94c;
+    --note-b: #f2977f;
+    --note-c: #7ad9ac;
+    --note-d: #94a8ff;
+    --shadow: rgba(0, 0, 0, 0.6);
+    --focus: #7ea2ff;
+  }
+}
+
 * {
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 2.5rem 1.25rem 4rem;
+  background: radial-gradient(circle at 12% 18%, var(--board-fleck) 0 2px, transparent 3px),
+    radial-gradient(circle at 78% 30%, var(--board-fleck) 0 2px, transparent 3px),
+    radial-gradient(circle at 35% 62%, var(--board-fleck) 0 2px, transparent 3px),
+    radial-gradient(circle at 88% 78%, var(--board-fleck) 0 2px, transparent 3px),
+    radial-gradient(circle at 55% 12%, var(--board-fleck) 0 2px, transparent 3px),
+    radial-gradient(circle at 20% 85%, var(--board-fleck) 0 2px, transparent 3px),
+    radial-gradient(circle at 65% 55%, var(--board-fleck) 0 2px, transparent 3px),
+    linear-gradient(160deg, var(--board), var(--board-deep));
+  font-family: var(--font-ui);
+  color: var(--ink);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.board {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.banner-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 2rem;
+}
+.banner {
+  background: var(--tape);
+  color: var(--ink);
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  line-height: 1;
+  padding: 0.75rem 2.2rem 0.9rem;
+  transform: rotate(-1.6deg);
+  clip-path: polygon(
+    0% 8%,
+    4% 0%,
+    12% 6%,
+    20% 1%,
+    30% 7%,
+    40% 0%,
+    50% 6%,
+    60% 1%,
+    70% 7%,
+    80% 0%,
+    88% 5%,
+    96% 0%,
+    100% 8%,
+    100% 90%,
+    96% 100%,
+    88% 94%,
+    78% 100%,
+    68% 93%,
+    58% 100%,
+    48% 94%,
+    38% 100%,
+    28% 93%,
+    18% 100%,
+    8% 94%,
+    0% 100%
+  );
+  box-shadow: 0 8px 16px -6px var(--shadow);
+  margin: 0;
+}
+
+.new-item-form {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: repeating-linear-gradient(var(--tape), var(--tape) 26px, var(--board-fleck) 27px);
+  background-color: var(--tape);
+  padding: 0.9rem;
+  transform: rotate(0.4deg);
+  box-shadow: 0 10px 20px -10px var(--shadow);
+  margin-bottom: 1.75rem;
+  border-radius: 2px;
+}
+
+.form-row {
+  flex: 1;
+}
+
+.new-item-form input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  color: var(--ink);
+  padding: 0.35rem 0.2rem;
+}
+.new-item-form input::placeholder {
+  color: var(--ink-soft);
+}
+.new-item-form input:focus {
+  outline: none;
+}
+.new-item-form input:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.pin-btn {
+  flex: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: none;
+  background: radial-gradient(circle at 32% 28%, #fff, var(--accent) 60%);
+  color: #fff;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 8px -2px var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pin-btn:hover {
+  filter: brightness(1.08);
+}
+.pin-btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0.3rem 0.9rem;
+}
+.meta span:last-child {
+  font-variant-numeric: tabular-nums;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1.2rem 1.1rem;
+}
+
+.note {
+  position: relative;
+  padding: 1.5rem 1.1rem 1.1rem;
+  border-radius: 2px 2px 8px 8px;
+  color: var(--ink);
+  box-shadow: 0 12px 20px -10px var(--shadow), 0 2px 5px rgba(0, 0, 0, 0.18);
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.2s ease, filter 0.3s ease;
+  font-family: var(--font-hand);
+}
+.note:hover,
+.note:focus-within {
+  transform: rotate(0deg) translateY(-3px);
+}
+.note:has(input:focus-visible) {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.note.color-a {
+  background: var(--note-a);
+}
+.note.color-b {
+  background: var(--note-b);
+}
+.note.color-c {
+  background: var(--note-c);
+}
+.note.color-d {
+  background: var(--note-d);
+}
+
+.note::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  translate: -50% 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, #fff, var(--accent) 62%);
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.4);
+}
+
+.note.done {
+  filter: saturate(0.55) brightness(0.97);
+}
+.note.done::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 18px 18px;
+  border-color: transparent transparent var(--board-fleck) transparent;
+}
+
+.note label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.note input[type='checkbox'] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkmark {
+  flex: none;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.2rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1.5px solid var(--ink-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: transparent;
+}
+.note input:checked ~ .checkmark {
+  background: var(--ink);
+  color: var(--note-a);
+  border-color: var(--ink);
+}
+
+.note-text {
+  position: relative;
+  font-size: 1.3rem;
+  line-height: 1.25;
+  font-weight: 600;
+}
+.note-text::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 52%;
+  height: 2px;
+  width: 100%;
+  background: var(--ink);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.35s ease;
+}
+.note.done .note-text::after {
+  transform: scaleX(1);
+}
+
+.btn-danger {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.45rem;
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.55;
+  padding: 0.2rem;
+}
+.btn-danger:hover {
+  opacity: 1;
+}
+.btn-danger:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.empty {
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  color: var(--board-ink);
+  text-align: center;
+  padding: 2.5rem 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note,
+  .note-text::after,
+  .pin-btn {
+    transition: none;
   }
-  
-  body {
-    background: #333;
-    color: hsl(200, 100%, 90%);
-    max-width: 400px;
-    padding: 1rem;
-    margin: 0 auto;
+}
+
+@media (max-width: 420px) {
+  .banner {
+    font-size: 1.9rem;
+    padding: 0.65rem 1.4rem 0.8rem;
   }
-  
-  .new-item-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .form-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-  }
-  
-  .btn {
-    background: hsl(200, 100%, 50%, 0.1);
-    border: 1px solid hsl(200, 100%, 50%);
-    color: hsl(200, 100%, 50%);
-    padding: 0.25em 0.5em;
-    border-radius: 0.25em;
-    cursor: pointer;
-    outline: none;
-  }
-  
-  .btn:hover,
-  .btn:focus-visible {
-    background: hsl(200, 100%, 50%, 0.2);
-  }
-  
-  .btn.btn-danger {
-    background: hsl(0, 100%, 40%, 0.1);
-    border: 1px solid hsl(0, 100%, 40%);
-    color: hsl(0, 100%, 40%);
-  }
-  
-  .btn.btn-danger:hover,
-  .btn.btn-danger:focus-visible {
-    background: hsl(0, 100%, 40%, 0.2);
-  }
-  
-  .new-item-form input {
-    outline: none;
-    border: 1px solid hsl(200, 100%, 40%);
-    background: hsl(200, 100%, 30%);
-    border-radius: 0.25em;
-    padding: 0.25em 0.5em;
-    color: hsl(200, 100%, 90%);
-  }
-  
-  .new-item-form input:focus {
-    border: 1px solid hsl(200, 100%, 70%);
-  }
-  
-  .header {
-    font-size: 1.5rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
   .list {
-    margin: 0;
-    padding: 0;
-    margin-left: 1rem;
-    list-style: none;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   }
-  
-  .list li:has(input:checked) label {
-    color: hsl(200, 20%, 40%);
-  }
-  
-  .list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-  
-  .list li {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-  
-  .list li label {
-    display: flex;
-    gap: 0.25rem;
-    cursor: pointer;
-    align-items: center;
-  }
-  
-  .list li:has(input:focus-visible) label {
-    outline: 1px solid hsl(200, 100%, 50%);
-  }
-  
-  .list li input {
-    outline: none;
-    width: 0;
-    height: 0;
-    appearance: none;
-    pointer-events: none;
-    position: absolute;
-  }
-  
-  .list li label::before {
-    content: "";
-    display: block;
-    width: 0.9rem;
-    height: 0.9rem;
-    background: hsl(200, 100%, 90%);
-    border-radius: 0.25em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .list li label:hover::before {
-    background: hsl(200, 100%, 80%);
-  }
-  
-  .list li:has(input:checked) label::before {
-    content: "✔";
-    background: hsl(200, 100%, 40%);
-    color: hsl(200, 100%, 90%);
-    font-size: 0.75rem;
-    font-weight: bold;
-  }
-  
-  .list li:has(input:checked) label:hover::before {
-    background: hsl(200, 100%, 30%);
-  }
+}
