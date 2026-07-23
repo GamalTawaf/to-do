@@ -1,5 +1,12 @@
 {
   "name": "to-do",
+  "description": "A sticky-note style React to-do app with drag-free pinning, local persistence, and playful styling.",
+  "author": "Gamal Tawaf",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GamalTawaf/to-do.git"
+  },
   "private": true,
   "homepage": "https://gamaltawaf.github.io/to-do/",
   "version": "0.1.0",
