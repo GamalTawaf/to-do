@@ -69,6 +69,9 @@ export default function App() {
       <span>{doneCount} done</span>
     </p>
     <ToDoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
+    <footer className="site-footer">
+      <a href="https://github.com/GamalTawaf/to-do" target="_blank" rel="noreferrer">View source on GitHub</a>
+    </footer>
   </div>
   )
 }
