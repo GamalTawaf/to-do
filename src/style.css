@@ -396,8 +396,15 @@ body {
   }
 }
 
-.site-footer {
-  text-align: center;
-  font-size: 0.85rem;
-  opacity: 0.7;
+.github-corner-link {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  color: #3a2f24;
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
+}
+
+.github-corner-link:hover {
+  opacity: 1;
 }
